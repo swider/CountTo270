@@ -1,14 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CountTo270</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Count to 270</title>
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+		
+		
+		<%= stylesheet_link_tag    "application" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+		
+	<!--<link type="text/css" rel="stylesheet" href="/assets/style.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="/assets/jquery.js"></script>
+	<script src="/assets/jquery.svg.min.js"></script>
+	<script src="/assets/jquery.svgdom.min.js"></script>
+	<script src="/assets/ct270.js"></script>
+	<script src="/assets/ct270.user.js"></script>
+	<script src="/assets/ct270.map.js"></script>-->
 </head>
 <body>
+	<div id="container">
+		<div id="header-container">
+			<header class="center-width">
+				<h1 id="logo"><span class="w">count</span><span class="g">to</span><span class="r">270</span></h1>
+				<nav id="topnav">
+					<a href="#">About</a> | <a href="#">Groups</a> | <span class="fb-login-button" data-perms="email">Login with Facebook</span>
+					<span id="loggedInAs" style="display: none;">
+						<img id="image"/><span id="name"></span> (<a href="#" onClick="FB.logout(function(){window.location.reload();})">Logout</a>)
+					</span>
+				</nav>
+			</header>
+		</div>
+		<div id="main-continer" class="center-width">
 
 <%= yield %>
 
+		</div>
+	</div>
+	
+	<div id="fb-root"></div>
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({appId: '249679251759732', status: true, cookie: true, xfbml: true });
+			FB.Event.subscribe('auth.login', function(response) {
+				window.location.reload();
+			});
+			FB.api('/me', function(user) {
+				if(user.error == undefined){
+					$('.fb-login-button').hide();
+					$('#loggedInAs').show();
+					var image = document.getElementById('image');
+					image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+					$('#name').text(user.name);
+					$('.fb-login-button').hide();
+					$('#loggedInAs').show();
+				}
+			});
+		};
+		(function(d){
+			var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+			js = d.createElement('script'); js.id = id; js.async = true;
+			js.src = "//connect.facebook.net/en_US/all.js";
+			d.getElementsByTagName('head')[0].appendChild(js);
+		}(document));
+	</script>
 </body>
 </html>
