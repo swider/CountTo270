@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Slug:</b>
+  <%= @ballot.slug %>
+</p>
+
+<p>
+  <b>User slug:</b>
+  <%= @ballot.user_slug %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @ballot.name %>
+</p>
+
+<p>
+  <b>Map slug:</b>
+  <%= @ballot.map_slug %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%= @ballot.public %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= @ballot.votes %>
+</p>
+
+
+<%= link_to 'Edit', edit_ballot_path(@ballot) %> |
+<%= link_to 'Back', ballots_path %>

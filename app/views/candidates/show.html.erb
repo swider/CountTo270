@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @candidate.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @candidate.last_name %>
+</p>
+
+<p>
+  <b>Slug:</b>
+  <%= @candidate.slug %>
+</p>
+
+<p>
+  <b>Party slug:</b>
+  <%= @candidate.party_slug %>
+</p>
+
+
+<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
+<%= link_to 'Back', candidates_path %>

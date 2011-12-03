@@ -1,0 +1,41 @@
+<%= form_for(@ballot) do |f| %>
+  <% if @ballot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ballot.errors.count, "error") %> prohibited this ballot from being saved:</h2>
+
+      <ul>
+      <% @ballot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :slug %><br />
+    <%= f.text_field :slug %>
+  </div>
+  <div class="field">
+    <%= f.label :user_slug %><br />
+    <%= f.text_field :user_slug %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :map_slug %><br />
+    <%= f.text_field :map_slug %>
+  </div>
+  <div class="field">
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </div>
+  <div class="field">
+    <%= f.label :votes %><br />
+    <%= f.text_field :votes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

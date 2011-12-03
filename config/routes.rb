@@ -1,4 +1,12 @@
 CountTo270::Application.routes.draw do
+  resources :parties
+
+  resources :ballots
+
+  resources :maps
+
+  resources :candidates
+
   resources :users
 
   # The priority is based upon order of creation:

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  slug: MyString
+  user_slug: MyString
+  name: MyString
+  map_slug: MyString
+  public: false
+  votes: MyString
+
+two:
+  slug: MyString
+  user_slug: MyString
+  name: MyString
+  map_slug: MyString
+  public: false
+  votes: MyString
