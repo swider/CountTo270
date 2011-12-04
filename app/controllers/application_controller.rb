@@ -47,6 +47,25 @@ class ApplicationController < ActionController::Base
           #   "verified": true,
           #   "updated_time": "2011-06-23T05:44:50+0000"
           #}
+          
+          # TODO: Move to User Model
+          @user = User.find_by_fb_id(session[:fb_id].to_i)
+          if !@user.nil? then
+            # find ballots
+            logger.info '>>> Already in DB'
+            
+          else 
+            # add user
+            logger.info '>>> Not in DB'
+            @user = User.new(:email => user['email'], :first_name => user['first_name'], :last_name => user['last_name'], :fb_id => user['id'], :slug => user['username'])
+            if @user.save then
+              logger.info '>>> Added to DB'
+            else
+              logger.info '>>> Failed to add to DB'
+            end
+            #User.add(user)
+          end
+          
           logger.info '>>> Now logged in as: ' + session[:username]
         end
       end

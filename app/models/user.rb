@@ -7,4 +7,10 @@ class User
   key :slug,        String,   :unique => true
   key :email,       String
 
+  # TODO: Move login logic here
+  def authenticate(fb_user)
+    
+    
+  end
+
 end
