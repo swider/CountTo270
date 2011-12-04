@@ -17,10 +17,19 @@
 			<header class="center-width">
 				<a href="/" id="logo"><span class="w">count</span><span class="g">to</span><span class="r">270</span></a>
 				<nav id="topnav">
-					<a href="#">About</a> | <a href="#">Groups</a> | <span class="fb-login-button" data-perms="email">Login with Facebook</span>
-					<span id="loggedInAs" style="display: none;">
-						<img id="image"/><span id="name"></span> (<a href="#" onClick="FB.logout(function(){window.location.reload();})">Logout</a>)
-					</span>
+					<a href="#">About</a> | <a href="#">Groups</a> | 
+					<% if !session[:loggedin] then %>
+						<span class="fb-login-button" data-perms="email" data-size="large">Login with Facebook</span>
+					<% else %>
+						<span id="loggedInAs">
+							<img class="image" src="http://graph.facebook.com/<%=session[:fb_id] %>/picture" /><span id="name"><%=session[:name] %></span> 
+							<% if session[:fb_token].nil? %>
+								<%= link_to "(Logout)", logout_path %>
+							<% else %>
+								<%= link_to "(Logout)", facebook_logout_path %>
+							<% end %>
+						</span>
+					<% end %>
 				</nav>
 			</header>
 		</div>
@@ -38,31 +47,22 @@
 		</div>
 	</div>
 	
-	<div id="fb-root"></div>
-	<script>
-		window.fbAsyncInit = function() {
-			FB.init({appId: '249679251759732', status: true, cookie: true, xfbml: true });
-			FB.Event.subscribe('auth.login', function(response) {
-				window.location.reload();
-			});
-			FB.api('/me', function(user) {
-				if(user.error == undefined){
-					$('.fb-login-button').hide();
-					$('#loggedInAs').show();
-					var image = document.getElementById('image');
-					image.src = 'http://graph.facebook.com/' + user.id + '/picture';
-					$('#name').text(user.name);
-					$('.fb-login-button').hide();
-					$('#loggedInAs').show();
-				}
-			});
-		};
-		(function(d){
-			var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-			js = d.createElement('script'); js.id = id; js.async = true;
-			js.src = "//connect.facebook.net/en_US/all.js";
-			d.getElementsByTagName('head')[0].appendChild(js);
-		}(document));
-	</script>
+	<% if !session[:loggedin] then %>
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function() {
+				FB.init({appId: '249679251759732', status: true, cookie: true, xfbml: true });
+				FB.Event.subscribe('auth.login', function(response) {
+					window.location.reload();
+				});
+			};
+			(function(d){
+				var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+				js = d.createElement('script'); js.id = id; js.async = true;
+				js.src = "//connect.facebook.net/en_US/all.js";
+				d.getElementsByTagName('head')[0].appendChild(js);
+			}(document));
+		</script>
+	<% end %>
 </body>
 </html>

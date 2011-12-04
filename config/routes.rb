@@ -8,6 +8,11 @@ CountTo270::Application.routes.draw do
   resources :candidates
 
   resources :users
+  
+  root :to => 'public#index'
+  
+  match '/facebook/logout' => 'public#facebook_logout', :as => :facebook_logout
+  match '/logout' => 'public#logout', :as => :logout
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -58,7 +63,7 @@ CountTo270::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'public#index'
+  # root :to => 'public#index'
 
   # See how all your routes lay out with "rake routes"
 
