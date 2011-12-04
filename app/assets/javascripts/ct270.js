@@ -9,5 +9,5 @@ var ct270 = {
 $(document).ready(function(){
 	ct270.map.init("#map-container");
 	ct270.user.init();
-	ct270.map.seed(ct270.user.getPresidential());
+	ct270.map.setVotes(ct270.user.getPresidential());
 });

@@ -16,9 +16,14 @@ ct270.map = (function(){
 		$statesBottom,
 		
 		activeCandidate = "r1",
+		votes = {},
 		
 
-		seed = function(states){
+		getVotes = function(states){
+			return votes;
+		},
+		
+		setVotes = function(states){
 			var origCandidate = activeCandidate;
 			$.each(states, function(name, candidate) { 
 				activeCandidate = candidate;
@@ -67,6 +72,7 @@ ct270.map = (function(){
 				$.each(ct270.candidates, function(name, cssClass) {
 					$graph.filter('.'+cssClass).width(parseInt(($swatches.filter('.'+cssClass).siblings('.total').text())/538*100) + '%');
 				});
+				votes[$el.attr('data-name')] = activeCandidate;
 			}
 		},
 	
@@ -89,6 +95,7 @@ ct270.map = (function(){
 	
 	return {
 		init: init,
-		seed: seed
+		setVotes: setVotes,
+		getVotes: getVotes
 	};
 }());
