@@ -9,7 +9,7 @@
 @u1: #a1a1a1;
 @r1: #cc0303;
 @b1: #143472;
-@i1: #006000;
+@g1: #006000;
 
 /* ---------------------
          RESET
@@ -130,6 +130,89 @@ p {
 
 
 
+
+.btn_core {
+	display: inline-block; zoom: 1;
+	position: relative;
+	padding: 6px 16px;
+	height: 16px;
+	font: 500 16px/1em 'VegurRegular', sans-serif;
+	text-decoration: none;
+	.border-radius(2px);
+	border: 1px solid rgba(0,0,0,.3);
+	box-shadow: 0 -2px 5px rgba(0,0,0,.2), inset 0 1px 1px rgba(0,0,0, 0.3);
+	text-shadow: 0 1px 2px rgba(0,0,0,.4);
+	.transition(background-color, .3s);
+	color: #232323;
+	background-color: #e1e1e1;
+	&:hover {
+		background-color: darken(#e1e1e1, 5%);
+	}
+	
+	&.loading {
+		text-indent: -9999px;
+		background: transparent !important;
+		border: none;
+		box-shadow: none !important;
+		&:after {
+			content: '.';
+			display: block;
+			width: 16px;
+			height: 16px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -8px;
+			margin-left: -8px;
+			background: url("/assets/loader.gif") center center;
+		}
+	}
+	
+	&.btn_white {
+		// default
+	}
+	&.btn_red {
+		color: #efefef;
+		background-color: @r1;
+		&:hover {
+			background-color: darken(@r1, 5%);
+		}
+		box-shadow: 0 2px 5px rgba(0,0,0,.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+	}
+	&.btn_blue {
+		color: #efefef;
+		background-color: @b1;
+		&:hover {
+			background-color: darken(@b1, 5%);
+		}
+		box-shadow: 0 2px 5px rgba(0,0,0,.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+	}
+	&.btn_green {
+		color: #efefef;
+		background-color: @g1;
+		&:hover {
+			background-color: darken(@g1, 5%);
+		}
+		box-shadow: 0 2px 5px rgba(0,0,0,.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+	}
+	&.btn_sm {
+		height: 10px;
+		font-size: 10px;
+	}
+	&.btn_md {
+		//default
+	}
+	&.btn_lg {
+		height: 22px;
+		font-size: 22px;
+	}
+}
+
+
+
+
+
+
 #map-container {
 	margin-bottom: 20px;
 }
@@ -148,7 +231,7 @@ p {
 			&.hover { fill: darken(@u1, 10%); }
 			&.r1 { fill: @r1; &.hover { fill: darken(@r1, 5%); } }
 			&.d1 { fill: @b1; &.hover { fill: darken(@b1, 5%); } }
-			&.i1 { fill: @i1; &.hover { fill: darken(@i1, 5%); } }
+			&.i1 { fill: @g1; &.hover { fill: darken(@g1, 5%); } }
 		}
 	}
 }
@@ -196,7 +279,7 @@ p {
 			background: @u1;
 			&.r1 { background: @r1; }
 			&.d1 { background: @b1; }
-			&.i1 { background: @i1; }
+			&.i1 { background: @g1; }
 			&.selected { .box-shadow(0 0 4px 1px rgba(30,30,30,0.75)); }
 		}
 		.name { }
@@ -230,10 +313,16 @@ p {
 		.graph { 
 			float: left;
 			height: 100%;
-			&.r1 { background: #cc0303; }
-			&.d1 { background: #143472; }
-			&.i1 { background: #006000; }
+			&.r1 { background: @r1; }
+			&.d1 { background: @b1; }
+			&.i1 { background: @g1; }
 		}
+	}
+	
+	#controls {
+		width: 100%;
+		margin-top: 7px;
+		text-align: center;
 	}
 }
 

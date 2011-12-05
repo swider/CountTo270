@@ -4,6 +4,7 @@ ct270.map = (function(){
 		undistributedSel = '#undistributed',
 		stateInfoSel = '#state_info',
 		graphSel = '.graph',
+		saveSel = '#save',
 		statesTopSel = '#states2 .state',
 		statesBottomSel = '#states1 .state',
 		
@@ -12,6 +13,7 @@ ct270.map = (function(){
 		$undistributed,
 		$stateInfo,
 		$graph,
+		$save,
 		$statesTop,
 		$statesBottom,
 		
@@ -30,6 +32,8 @@ ct270.map = (function(){
 				$('#states2 .state[data-name='+name+']').click();
 			});
 			activeCandidate = origCandidate;
+			
+			//$("<style type='text/css'> .CANDIDATE_SLUG{ fill:PARTY_COLOR; } </style>").appendTo("head");
 		},
 	
 		setActiveCandidate = function(){
@@ -75,6 +79,16 @@ ct270.map = (function(){
 				votes[$el.attr('data-name')] = activeCandidate;
 			}
 		},
+		
+		saveMap = function(){
+			$save.addClass('loading');
+			
+			var
+				callback = function(){ $save.removeClass('loading'); };
+			
+			ct270.user.saveMap(callback);
+			return false;
+		},
 	
 		init = function(mapContainerSel){
 			$mapContainer = $(mapContainerSel);
@@ -82,10 +96,12 @@ ct270.map = (function(){
 			$undistributed = $mapContainer.find(undistributedSel);
 			$stateInfo = $mapContainer.find(stateInfoSel);
 			$graph = $mapContainer.find(graphSel);
+			$save = $mapContainer.find(saveSel);
 			$statesTop = $mapContainer.find(statesTopSel);
 			$statesBottom = $mapContainer.find(statesBottomSel);
 			
 			$swatches.click(setActiveCandidate);
+			$save.click(saveMap);
 			
 			$statesTop
 				.hover(stateMouseOver, stateMouseOff)
